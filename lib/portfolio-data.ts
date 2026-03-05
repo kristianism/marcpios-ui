@@ -1,14 +1,12 @@
 // ─── Portfolio Configuration ──────────────────────────────────────────────────
-// Edit this file to customize your portfolio content.
-// ──────────────────────────────────────────────────────────────────────────────
 
 export const person = {
   firstName: "Marc",
-  lastName: "Pio",
-  name: "Marc Pio",
-  role: "Design Engineer",
-  avatar: "/images/avatar.jpg",
-  email: "marcpio@example.com",
+  lastName: "Pios",
+  name: "Marc Pios",
+  role: "Financial Systems Developer",
+  avatar: "/profile.jpg",
+  email: "marcpios@pm.me",
   location: "Asia/Manila",
   languages: ["English", "Filipino"],
 };
@@ -25,9 +23,9 @@ export const social = [
     link: "https://linkedin.com",
   },
   {
-    name: "Instagram",
-    icon: "instagram" as const,
-    link: "https://instagram.com",
+    name: "Facebook",
+    icon: "facebook" as const,
+    link: "https://facebook.com",
   },
   {
     name: "Email",
@@ -39,10 +37,10 @@ export const social = [
 export const home = {
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: "Building bridges between design and code",
-  subline: `I'm ${person.firstName}, a ${person.role.toLowerCase()} crafting intuitive user experiences. After hours, I build my own projects.`,
+  headline: "Bridging the gap between financial integrity and scalable code.",
+  subline: `I'm ${person.firstName}, a ${person.role.toLowerCase()} specializing in building robust infrastructure where financial logic meets high-performance code. After hours, I build my own projects.`,
   featured: {
-    display: true,
+    display: false,
     title: "Featured Work",
     href: "#projects",
   },
@@ -165,7 +163,7 @@ export const gallery = {
 
 export const navItems = [
   { label: "Home", href: "#home", icon: "home" as const },
-  { label: "About", href: "#about", icon: "person" as const },
   { label: "Work", href: "#projects", icon: "grid" as const },
+  { label: "About", href: "#about", icon: "person" as const },
   { label: "Gallery", href: "#gallery", icon: "gallery" as const },
 ];
