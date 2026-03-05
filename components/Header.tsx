@@ -1,14 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { useEffect, useRef, useState, useCallback } from "react";
+import { motion } from "motion/react";
 import { navItems } from "@/lib/portfolio-data";
 import { ThemeToggle } from "./ThemeToggle";
-import { FiHome, FiUser, FiGrid, FiImage, FiMenu, FiX } from "react-icons/fi";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { FiHome, FiUser, FiGrid, FiImage } from "react-icons/fi";
 
 const iconMap = {
   home: FiHome,
@@ -18,46 +14,54 @@ const iconMap = {
 } as const;
 
 export function Header() {
-  const [activeSection, setActiveSection] = useState("");
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState(navItems[0].href);
   const headerRef = useRef<HTMLElement>(null);
+  const activeRef = useRef(navItems[0].href);
+
+  const updateActive = useCallback(() => {
+    let current = navItems[0].href;
+    const triggerLine = window.innerHeight * 0.35;
+
+    for (const item of navItems) {
+      const el = document.getElementById(item.href.slice(1));
+      if (el) {
+        const top = el.getBoundingClientRect().top;
+        if (top <= triggerLine) {
+          current = item.href;
+        }
+      }
+    }
+
+    if (activeRef.current !== current) {
+      activeRef.current = current;
+      setActiveSection(current);
+    }
+  }, []);
 
   useEffect(() => {
-    const sections = navItems
-      .map((item) => document.querySelector(item.href))
-      .filter(Boolean) as Element[];
-
-    const observers = sections.map((section) => {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setActiveSection(`#${entry.target.id}`);
-            }
-          });
-        },
-        { threshold: 0.3, rootMargin: "-80px 0px -40% 0px" }
-      );
-      observer.observe(section);
-      return observer;
-    });
-
-    return () => observers.forEach((obs) => obs.disconnect());
-  }, []);
+    let rafId: number;
+    const loop = () => {
+      updateActive();
+      rafId = requestAnimationFrame(loop);
+    };
+    rafId = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(rafId);
+  }, [updateActive]);
 
   useEffect(() => {
     if (!headerRef.current) return;
-
-    gsap.fromTo(
-      headerRef.current,
-      { y: -40, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", delay: 0.2 }
-    );
+    headerRef.current.style.opacity = "0";
+    headerRef.current.style.transform = "translateY(-20px)";
+    requestAnimationFrame(() => {
+      if (!headerRef.current) return;
+      headerRef.current.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+      headerRef.current.style.opacity = "1";
+      headerRef.current.style.transform = "translateY(0)";
+    });
   }, []);
 
   const handleNavClick = (href: string) => {
-    setMobileOpen(false);
-    const el = document.querySelector(href);
+    const el = document.getElementById(href.slice(1));
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
     }
