@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { motion, useInView } from "motion/react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { about, person } from "@/lib/portfolio-data";
@@ -53,9 +54,16 @@ export function AboutSection() {
         {about.intro.display && (
           <Reveal delay={0.1}>
             <div className="mb-20 flex flex-col items-center gap-6 text-center sm:flex-row sm:items-start sm:text-left">
-              <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-neutral-200 to-neutral-100 text-2xl font-bold text-neutral-400 dark:from-neutral-800 dark:to-neutral-700 dark:text-neutral-500">
-                {person.firstName[0]}
-                {person.lastName[0]}
+              <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl bg-neutral-200 dark:bg-neutral-800">
+                <Image
+                  src={person.avatar}
+                  alt={person.name}
+                  fill
+                  quality={100}
+                  sizes="80px"
+                  priority
+                  className="object-cover"
+                />
               </div>
               <div className="space-y-2">
                 <h3 className="text-2xl font-bold text-neutral-900 dark:text-white">
