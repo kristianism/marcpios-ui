@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { motion } from "motion/react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { home, person } from "@/lib/portfolio-data";
@@ -70,9 +71,15 @@ export function HeroSection() {
               href="#about"
               className="group flex items-center gap-3 rounded-full bg-neutral-900 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-neutral-900/20 transition-all hover:bg-neutral-800 hover:shadow-xl dark:bg-white dark:text-neutral-900 dark:shadow-white/10 dark:hover:bg-neutral-100"
             >
-              <div className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-full bg-neutral-700 text-xs font-bold text-white dark:bg-neutral-300 dark:text-neutral-800">
-                {person.firstName[0]}
-                {person.lastName[0]}
+              <div className="relative h-7 w-7 overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-700">
+                <Image
+                  src={person.avatar}
+                  alt={person.name}
+                  fill
+                  quality={100}
+                  sizes="28px"
+                  className="object-cover"
+                />
               </div>
               About me
               <motion.span
