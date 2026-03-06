@@ -12,7 +12,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Marc Pios — Portfolio",
-  description: "Design engineer crafting intuitive user experiences",
+  description: "Bridging the gap between financial integrity and scalable code.",
 };
 
 export default function RootLayout({
