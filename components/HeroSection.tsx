@@ -1,46 +1,32 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { motion } from "motion/react";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { home, person } from "@/lib/portfolio-data";
 import { Reveal } from "./Reveal";
 
-gsap.registerPlugin(ScrollTrigger);
-
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
 
-  useEffect(() => {
-    if (!sectionRef.current || !headlineRef.current) return;
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
 
-    // Parallax fade on scroll
-    gsap.to(sectionRef.current, {
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      },
-      opacity: 0,
-      y: -60,
-      ease: "none",
-    });
-  }, []);
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, -60]);
 
   return (
-    <section
+    <motion.section
       ref={sectionRef}
       id="home"
+      style={{ opacity, y }}
       className="relative flex min-h-[100dvh] w-full flex-col items-center justify-center px-6 py-32"
     >
       <div className="flex max-w-2xl flex-col items-center text-center">
         <Reveal delay={0.1} y={8}>
           <h1
-            ref={headlineRef}
             className="text-4xl font-bold leading-tight tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl dark:text-white"
           >
             {home.headline}
@@ -99,6 +85,6 @@ export function HeroSection() {
           <div className="h-8 w-px bg-gradient-to-b from-neutral-400 to-transparent" />
         </motion.div>
       </Reveal>
-    </section>
+    </motion.section>
   );
 }
