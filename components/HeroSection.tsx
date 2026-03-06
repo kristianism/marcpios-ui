@@ -38,18 +38,6 @@ export function HeroSection() {
       className="relative flex min-h-[100dvh] w-full flex-col items-center justify-center px-6 py-32"
     >
       <div className="flex max-w-2xl flex-col items-center text-center">
-        {home.featured.display && (
-          <Reveal delay={0} y={0} blur>
-            <a
-              href={home.featured.href}
-              className="mb-8 inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 px-4 py-1.5 text-sm font-medium text-cyan-600 transition-colors hover:bg-cyan-500/10 dark:border-cyan-400/20 dark:bg-cyan-400/5 dark:text-cyan-400 dark:hover:bg-cyan-400/10"
-            >
-              <span className="h-1.5 w-1.5 rounded-full bg-cyan-500 dark:bg-cyan-400" />
-              {home.featured.title}
-            </a>
-          </Reveal>
-        )}
-
         <Reveal delay={0.1} y={8}>
           <h1
             ref={headlineRef}
@@ -78,7 +66,7 @@ export function HeroSection() {
                   fill
                   quality={100}
                   sizes="28px"
-                  className="object-cover"
+                  className="object-cover select-none pointer-events-none"
                 />
               </div>
               About me

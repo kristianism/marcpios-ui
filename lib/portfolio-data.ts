@@ -5,7 +5,7 @@ export const person = {
   lastName: "Pios",
   name: "Marc Pios",
   role: "Financial Systems Developer",
-  avatar: "/profile.jpg",
+  avatar: "/profile-picture.jpg",
   email: "marcpios@proton.me",
   location: "Asia/Manila",
   languages: ["English", "Filipino"],
@@ -39,11 +39,6 @@ export const home = {
   description: `Portfolio website showcasing my work as a ${person.role}`,
   headline: "Bridging the gap between financial integrity and scalable code.",
   subline: `I'm ${person.firstName}, a ${person.role.toLowerCase()} specializing in building robust infrastructure where financial logic meets high-performance code. After hours, I build my own projects.`,
-  featured: {
-    display: false,
-    title: "Featured Work",
-    href: "#projects",
-  },
 };
 
 export const about = {
