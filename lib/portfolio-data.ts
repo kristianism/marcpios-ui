@@ -6,7 +6,7 @@ export const person = {
   name: "Marc Pios",
   role: "Financial Systems Developer",
   avatar: "/profile.jpg",
-  email: "marcpios@pm.me",
+  email: "marcpios@proton.me",
   location: "Asia/Manila",
   languages: ["English", "Filipino"],
 };
@@ -15,17 +15,17 @@ export const social = [
   {
     name: "GitHub",
     icon: "github" as const,
-    link: "https://github.com",
+    link: "https://github.com/kristianism",
   },
   {
     name: "LinkedIn",
     icon: "linkedin" as const,
-    link: "https://linkedin.com",
+    link: "https://www.linkedin.com/in/marcpios/",
   },
   {
     name: "Facebook",
     icon: "facebook" as const,
-    link: "https://facebook.com",
+    link: "https://facebook.com/marcpios",
   },
   {
     name: "Email",
@@ -83,11 +83,11 @@ export const about = {
     title: "Studies",
     institutions: [
       {
-        name: "University of Design",
-        description: "Studied software engineering and human-computer interaction.",
+        name: "University of Santo Tomas (UST) - BS Management Accounting",
+        description: "Combining accounting principles with systems thinking, laying the groundwork for a career at the intersection of finance and technology.",
       },
       {
-        name: "Build the Future",
+        name: "Forensic Accountant",
         description: "Studied online marketing and personal branding.",
       },
     ],
@@ -96,20 +96,31 @@ export const about = {
     display: true,
     title: "Technical Skills",
     skills: [
+
       {
-        title: "Figma",
-        description: "Able to prototype with high fidelity at rapid speed.",
-        tags: ["Figma", "Design Systems", "Prototyping"],
+        title: "n8n Automation",
+        description: "Designing and implementing custom n8n workflows to automate data pipelines, API integrations, and repetitive tasks across financial systems.",
+        tags: ["n8n", "Automation", "Webhooks", "APIs", "JavaScript"],
       },
       {
         title: "Next.js",
-        description: "Building modern web applications with Next.js and React.",
-        tags: ["TypeScript", "React", "Next.js", "Tailwind CSS"],
+        description: "Developing robust, server-rendered financial web applications, clean architecture, type-safe APIs, and interfaces built for data density and reliability.",
+        tags: ["TypeScript", "React", "Next.js", "Tailwind CSS", "Wagmi", "RainbowKit"],
       },
       {
-        title: "Motion Design",
-        description: "Creating fluid animations and micro-interactions.",
-        tags: ["GSAP", "Framer Motion", "CSS Animations"],
+        title: "Web Motion",
+        description: "Implementing performant, scroll-driven animations and UI transitions using GSAP and Motion, with Lenis for buttery-smooth scroll experiences.",
+        tags: ["GSAP", "Motion", "Lenis"],
+      },
+      {
+        title: "Solidity",
+        description: "Developing smart contract systems that encode financial rules on-chain, with emphasis on security, auditability, and upgradeability patterns.",
+        tags: ["Blockchain", "DeFi", "Foundry", "Hardhat", "Smart Contracts", "Web3"],
+      },
+      {
+        title: "Cloud Accounting",
+        description: "Proficient across multiple accounting platforms from setup and chart of accounts configuration to reconciliation workflows and financial reporting",
+        tags: ["Xero", "Xero API", "Quickbooks", "Manager.io"],
       },
     ],
   },
@@ -117,24 +128,24 @@ export const about = {
 
 export const projects = [
   {
-    slug: "design-system",
-    title: "Design System",
+    slug: "my-portfolio",
+    title: "Portfolio Website",
     summary:
-      "A comprehensive design system built for consistency and scalability across multiple products and platforms.",
+      "A fast, animated portfolio site built with Next.js showcasing projects, skills, and a photo gallery with fluid scroll experiences powered by GSAP and Lenis. Inspired by OnceUI's Magic Portfolio template.",
     image: "/images/projects/project-01.jpg",
-    tags: ["Design", "React", "TypeScript"],
+    tags: ["Next.js", "React", "TypeScript", "GSAP", "Lenis"],
     link: "#",
-    year: "2024",
+    year: "2026",
   },
   {
-    slug: "portfolio-builder",
-    title: "Portfolio Builder",
+    slug: "n8n-workflows",
+    title: "n8n Workflow Library",
     summary:
-      "An intuitive portfolio builder that lets creators showcase their work with beautiful, customizable templates.",
+      "A growing library of self-hosted n8n automation workflows designed to eliminate repetitive tasks across financial systems, APIs, and data pipelines.",
     image: "/images/projects/project-02.jpg",
-    tags: ["Next.js", "Tailwind", "GSAP"],
+    tags: ["n8n", "Javascript", "Automation", "Webhooks", "APIs"],
     link: "#",
-    year: "2023",
+    year: "2026",
   },
   {
     slug: "figma-pipeline",
@@ -163,7 +174,7 @@ export const gallery = {
 
 export const navItems = [
   { label: "Home", href: "#home", icon: "home" as const },
-  { label: "Work", href: "#projects", icon: "grid" as const },
   { label: "About", href: "#about", icon: "person" as const },
+  { label: "Work", href: "#projects", icon: "grid" as const },
   { label: "Gallery", href: "#gallery", icon: "gallery" as const },
 ];
