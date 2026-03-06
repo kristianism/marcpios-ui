@@ -1,41 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence, useInView } from "motion/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gallery } from "@/lib/portfolio-data";
 import { Reveal } from "./Reveal";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export function GallerySection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (!sectionRef.current) return;
-
-    const items = sectionRef.current.querySelectorAll(".gallery-item");
-    items.forEach((item, i) => {
-      gsap.fromTo(
-        item,
-        { y: 40 + (i % 3) * 20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          delay: (i % 3) * 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: item,
-            start: "top 90%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    });
-  }, []);
 
   return (
     <section ref={sectionRef} id="gallery" className="relative w-full px-6 py-12">
@@ -53,38 +25,12 @@ export function GallerySection() {
         {/* Masonry Grid */}
         <div className="columns-2 gap-4 md:columns-3">
           {gallery.images.map((image, index) => (
-            <div
+            <GalleryItem
               key={index}
-              className="gallery-item mb-4 break-inside-avoid"
-            >
-              <button
-                onClick={() => setLightboxIndex(index)}
-                className="group relative w-full overflow-hidden rounded-xl"
-              >
-                <div
-                  className={`w-full bg-gradient-to-br from-neutral-200 via-neutral-100 to-neutral-200 transition-transform duration-700 group-hover:scale-105 dark:from-neutral-800 dark:via-neutral-700 dark:to-neutral-800 ${
-                    image.orientation === "vertical" ? "aspect-[3/4]" : "aspect-[4/3]"
-                  }`}
-                >
-                  <div className="flex h-full items-center justify-center text-neutral-400 dark:text-neutral-500">
-                    <svg
-                      className="h-10 w-10 opacity-30"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={1}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0 0 22.5 18.75V5.25A2.25 2.25 0 0 0 20.25 3H3.75A2.25 2.25 0 0 0 1.5 5.25v13.5A2.25 2.25 0 0 0 3.75 21Z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10" />
-              </button>
-            </div>
+              image={image}
+              index={index}
+              onClick={() => setLightboxIndex(index)}
+            />
           ))}
         </div>
       </div>
@@ -159,5 +105,59 @@ export function GallerySection() {
         )}
       </AnimatePresence>
     </section>
+  );
+}
+
+interface GalleryItemProps {
+  image: { orientation: string; alt: string };
+  index: number;
+  onClick: () => void;
+}
+
+function GalleryItem({ image, index, onClick }: GalleryItemProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const colOffset = index % 3;
+
+  return (
+    <motion.div
+      ref={ref}
+      className="mb-4 break-inside-avoid"
+      initial={{ opacity: 0, y: 40 + colOffset * 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{
+        duration: 0.8,
+        delay: colOffset * 0.1,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+    >
+      <button
+        onClick={onClick}
+        className="group relative w-full overflow-hidden rounded-xl"
+      >
+        <div
+          className={`w-full bg-gradient-to-br from-neutral-200 via-neutral-100 to-neutral-200 transition-transform duration-700 group-hover:scale-105 dark:from-neutral-800 dark:via-neutral-700 dark:to-neutral-800 ${
+            image.orientation === "vertical" ? "aspect-[3/4]" : "aspect-[4/3]"
+          }`}
+        >
+          <div className="flex h-full items-center justify-center text-neutral-400 dark:text-neutral-500">
+            <svg
+              className="h-10 w-10 opacity-30"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={1}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0 0 22.5 18.75V5.25A2.25 2.25 0 0 0 20.25 3H3.75A2.25 2.25 0 0 0 1.5 5.25v13.5A2.25 2.25 0 0 0 3.75 21Z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10" />
+      </button>
+    </motion.div>
   );
 }

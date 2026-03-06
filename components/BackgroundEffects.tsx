@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useCallback } from "react";
-import gsap from "gsap";
+import { motion } from "motion/react";
 
 interface BackgroundDotsProps {
   dotSize?: number;
@@ -55,10 +55,6 @@ export function BackgroundDots({
       attributeFilter: ["class"],
     });
 
-    if (canvasRef.current) {
-      gsap.fromTo(canvasRef.current, { opacity: 0 }, { opacity: 1, duration: 1.5, ease: "power2.out" });
-    }
-
     return () => {
       window.removeEventListener("resize", draw);
       observer.disconnect();
@@ -66,34 +62,27 @@ export function BackgroundDots({
   }, [draw]);
 
   return (
-    <canvas
+    <motion.canvas
       ref={canvasRef}
       className="pointer-events-none fixed inset-0 z-0"
       aria-hidden="true"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1.5, ease: "easeOut" }}
     />
   );
 }
 
 export function BackgroundGradient() {
-  const gradientRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!gradientRef.current) return;
-
-    gsap.fromTo(
-      gradientRef.current,
-      { opacity: 0, scale: 0.8 },
-      { opacity: 1, scale: 1, duration: 2, ease: "power3.out" }
-    );
-  }, []);
-
   return (
-    <div
-      ref={gradientRef}
+    <motion.div
       className="pointer-events-none fixed inset-0 z-0"
       aria-hidden="true"
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 2, ease: "easeOut" }}
     >
       <div className="absolute left-1/2 top-0 h-[60vh] w-[80vw] -translate-x-1/2 rounded-full bg-gradient-to-b from-cyan-500/8 via-transparent to-transparent blur-3xl dark:from-cyan-400/8" />
-    </div>
+    </motion.div>
   );
 }

@@ -1,37 +1,20 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useRef } from "react";
+import { motion, useInView } from "motion/react";
 
 export function SectionDivider() {
   const lineRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!lineRef.current) return;
-    gsap.fromTo(
-      lineRef.current,
-      { scaleX: 0 },
-      {
-        scaleX: 1,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: lineRef.current,
-          start: "top 85%",
-          toggleActions: "play none none none",
-        },
-      }
-    );
-  }, []);
+  const isInView = useInView(lineRef, { once: true, margin: "-15%" });
 
   return (
     <div className="mx-auto w-full max-w-3xl px-6">
-      <div
+      <motion.div
         ref={lineRef}
         className="h-px w-full origin-left bg-gradient-to-r from-transparent to-transparent via-gray-300"
+        initial={{ scaleX: 0 }}
+        animate={isInView ? { scaleX: 1 } : {}}
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
       />
     </div>
   );

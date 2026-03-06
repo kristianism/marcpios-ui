@@ -1,11 +1,7 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { motion, useInView } from "motion/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useRef } from "react";
+import { motion, useInView, useScroll, useTransform } from "motion/react";
 
 interface ProjectCardProps {
   title: string;
@@ -30,21 +26,11 @@ export function ProjectCard({
   const imageRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: true, margin: "-80px" });
 
-  useEffect(() => {
-    if (!cardRef.current || !imageRef.current) return;
-
-    // Subtle parallax on the image
-    gsap.to(imageRef.current, {
-      scrollTrigger: {
-        trigger: cardRef.current,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 1,
-      },
-      y: -30,
-      ease: "none",
-    });
-  }, []);
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, -30]);
 
   return (
     <motion.div
@@ -61,8 +47,9 @@ export function ProjectCard({
       <div className="overflow-hidden rounded-2xl border border-neutral-100 bg-white shadow-sm transition-shadow duration-500 hover:shadow-lg dark:border-neutral-800 dark:bg-neutral-900/50">
         {/* Image */}
         <div className="relative aspect-[16/9] overflow-hidden bg-neutral-100 dark:bg-neutral-800">
-          <div
+          <motion.div
             ref={imageRef}
+            style={{ y: imageY }}
             className="absolute inset-0 flex items-center justify-center will-change-transform"
           >
             <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-neutral-200 via-neutral-100 to-neutral-200 text-neutral-400 transition-transform duration-700 group-hover:scale-105 dark:from-neutral-800 dark:via-neutral-700 dark:to-neutral-800 dark:text-neutral-500">
@@ -80,7 +67,7 @@ export function ProjectCard({
                 />
               </svg>
             </div>
-          </div>
+          </motion.div>
           <div className="absolute bottom-3 right-3 rounded-lg bg-white/80 px-2.5 py-1 text-xs font-medium text-neutral-600 backdrop-blur-sm dark:bg-neutral-900/80 dark:text-neutral-400">
             {year}
           </div>

@@ -1,39 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion, useInView } from "motion/react";
 import { about, person } from "@/lib/portfolio-data";
 import { Reveal, RevealGroup, RevealChild } from "./Reveal";
 
-gsap.registerPlugin(ScrollTrigger);
-
 export function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const timelineRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!timelineRef.current) return;
-
-    const lines = timelineRef.current.querySelectorAll(".timeline-line");
-    lines.forEach((line) => {
-      gsap.fromTo(
-        line,
-        { scaleY: 0 },
-        {
-          scaleY: 1,
-          duration: 0.8,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: line,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    });
-  }, []);
 
   return (
     <section ref={sectionRef} id="about" className="relative w-full px-6 py-12 select-none">
@@ -84,7 +58,7 @@ export function AboutSection() {
 
         {/* Work Experience */}
         {about.work.display && (
-          <div className="mb-20" ref={timelineRef}>
+          <div className="mb-20">
             <Reveal>
               <h3 className="mb-8 text-lg font-bold text-neutral-900 dark:text-white">
                 {about.work.title}
@@ -99,7 +73,7 @@ export function AboutSection() {
                     <div className="flex flex-col items-center">
                       <div className="z-10 flex h-3 w-3 shrink-0 items-center justify-center rounded-full border-2 border-cyan-500 bg-white dark:border-cyan-400 dark:bg-neutral-900" />
                       {i < about.work.experiences.length - 1 && (
-                        <div className="timeline-line h-full w-px origin-top bg-neutral-200 dark:bg-neutral-700" />
+                        <TimelineLine />
                       )}
                     </div>
 
@@ -179,6 +153,21 @@ export function AboutSection() {
         )}
       </div>
     </section>
+  );
+}
+
+function TimelineLine() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-15%" });
+
+  return (
+    <motion.div
+      ref={ref}
+      className="h-full w-px origin-top bg-neutral-200 dark:bg-neutral-700"
+      initial={{ scaleY: 0 }}
+      animate={isInView ? { scaleY: 1 } : {}}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+    />
   );
 }
 
