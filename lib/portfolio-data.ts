@@ -18,14 +18,19 @@ export const social = [
     link: "https://github.com/kristianism",
   },
   {
+    name: "Telegram",
+    icon: "telegram" as const,
+    link: "https://t.me/thisiskristian",
+  },
+  {
+    name: "Discord",
+    icon: "discord" as const,
+    link: "https://discord.com/users/iamkristian",
+  },
+  {
     name: "LinkedIn",
     icon: "linkedin" as const,
     link: "https://www.linkedin.com/in/marcpios/",
-  },
-  {
-    name: "Facebook",
-    icon: "facebook" as const,
-    link: "https://facebook.com/marcpios",
   },
   {
     name: "Email",
@@ -58,10 +63,8 @@ export const about = {
         timeframe: "2025 — Present",
         role: "Financial Systems Automation Developer",
         achievements: [
-          "Designed and deployed self-hosted n8n automation workflows connecting accounting platforms (Xero, QuickBooks) with external APIs to eliminate manual financial data entry.",
-          "Built automated reporting pipelines that aggregate transaction data, reconcile records, and deliver scheduled financial summaries to stakeholders.",
-          "Integrated webhook-driven workflows to trigger real-time alerts and actions based on financial events, reducing response time on critical accounting tasks.",
-          "Developed JavaScript-powered n8n nodes for custom data transformation and business logic, extending native workflow capabilities for complex financial use cases.",
+          "Designed and deployed self-hosted n8n workflows connecting accounting platforms (Xero, QuickBooks) with external APIs, eliminating manual data entry and delivering scheduled financial summaries to stakeholders.",
+          "Built webhook-driven pipelines with custom JavaScript nodes for real-time alerts, transaction reconciliation, and complex financial data transformations.",
         ],
       },
       {
@@ -69,10 +72,8 @@ export const about = {
         timeframe: "2024 — Present",
         role: "Web Developer",
         achievements: [
-          "Built full-stack web applications with Next.js and TypeScript, focusing on server-rendered financial interfaces and data-dense dashboards.",
-          "Developed Web3-connected frontends using Wagmi and RainbowKit, enabling wallet authentication and on-chain interactions for DeFi applications.",
-          "Implemented scroll-driven animations and page transitions using GSAP and Motion with Lenis, delivering polished UI experiences.",
-          "Designed and shipped responsive, accessible UIs with Tailwind CSS across multiple independent and client projects.",
+          "Built full-stack web applications with Next.js and TypeScript, including server-rendered financial dashboards and Web3-connected frontends with wallet auth via Wagmi and RainbowKit.",
+          "Delivered polished, responsive UIs with Tailwind CSS, GSAP, and Motion with Lenis for scroll-driven animations and smooth page transitions.",
         ],
       },
       {
@@ -80,10 +81,8 @@ export const about = {
         timeframe: "2021 — Present",
         role: "Blockchain Developer",
         achievements: [
-          "Developed and deployed ERC-20 token contracts and NFT collections, covering minting logic, metadata standards, and on-chain royalty enforcement.",
-          "Built yield farming and yield aggregator protocols, implementing reward distribution mechanics, vault strategies, and gas-optimized compounding logic.",
-          "Contributed to lending protocol development, working on collateralization logic, liquidation mechanisms, and interest rate models.",
-          "Participated in smart contract security audits, identifying vulnerabilities across reentrancy, access control, and arithmetic edge cases.",
+          "Developed and deployed ERC-20 tokens, NFT collections, yield farming and yield aggregator protocols, automated market makers, and lending systems with gas-optimized logic and on-chain financial mechanics.",
+          "Conducted smart contract security audits, identifying vulnerabilities across reentrancy, access control, and arithmetic edge cases.",
         ],
       },
     ],
@@ -93,12 +92,16 @@ export const about = {
     title: "Studies",
     institutions: [
       {
-        name: "University of Santo Tomas (UST) - BS Management Accounting",
-        description: "Combining accounting principles with systems thinking, laying the groundwork for a career at the intersection of finance and technology.",
+        name: "Institute of Certified Forensic Accountants",
+        description: "Certified Forensic Accountant (CrFA) credential, covering forensic accounting principles, investigative techniques, and legal aspects of financial fraud examination.", 
       },
       {
-        name: "Placeholder",
-        description: "Studied online marketing and personal branding.",
+        name: "Institute of Financial Consultants",
+        description: "Certified Financial Consultant (CFC) designation, covering financial planning, investment strategies, and ethical practices in the financial industry.",
+      },
+      {
+        name: "University of Santo Tomas (UST) - BS Management Accounting",
+        description: "Combining accounting principles with systems thinking, laying the groundwork for a career at the intersection of finance and technology.",
       },
     ],
   },
@@ -106,7 +109,6 @@ export const about = {
     display: true,
     title: "Technical Skills",
     skills: [
-
       {
         title: "n8n Automation",
         description: "Designing and implementing custom n8n workflows to automate data pipelines, API integrations, and repetitive tasks across financial systems.",
@@ -146,9 +148,9 @@ export const projects = [
     slug: "my-portfolio",
     title: "Portfolio Website",
     summary:
-      "A fast, animated portfolio site built with Next.js showcasing projects, skills, and a photo gallery with fluid scroll experiences powered by GSAP and Lenis. Inspired by OnceUI's Magic Portfolio template.",
-    image: "/images/projects/project-01.jpg",
-    tags: ["Next.js", "React", "TypeScript", "GSAP", "Lenis"],
+      "A fast, animated portfolio site built with Next.js showcasing projects, skills, and a photo gallery with fluid scroll experiences powered by Motion and Lenis. Inspired by OnceUI's Magic Portfolio template.",
+    image: "/portfolio-website.png",
+    tags: ["Next.js", "React", "TypeScript", "Motion", "Lenis"],
     link: "#",
     year: "2026",
   },
