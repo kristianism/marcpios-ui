@@ -3,13 +3,15 @@
 import { person, social } from "@/lib/portfolio-data";
 import { Reveal } from "./Reveal";
 import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
-import { FaFacebook } from "react-icons/fa6";
+import { FaFacebook, FaTelegram, FaDiscord } from "react-icons/fa6";
 
 const socialIconMap: Record<string, React.ComponentType<{ size?: number }>> = {
   github: FiGithub,
   linkedin: FiLinkedin,
   facebook: FaFacebook,
   email: FiMail,
+  telegram: FaTelegram,
+  discord: FaDiscord,
 };
 
 export function Footer() {
