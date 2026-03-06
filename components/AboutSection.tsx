@@ -37,7 +37,7 @@ export function AboutSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="about" className="relative w-full px-6 py-6 lg:py-6">
+    <section ref={sectionRef} id="about" className="relative w-full px-6 py-12 select-none">
       <div className="mx-auto max-w-3xl">
         {/* Section Header */}
         <Reveal>
@@ -53,16 +53,19 @@ export function AboutSection() {
         {/* Intro */}
         {about.intro.display && (
           <Reveal delay={0.1}>
-            <div className="mb-20 flex flex-col items-center gap-6 text-center sm:flex-row sm:items-start sm:text-left">
-              <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl bg-neutral-200 dark:bg-neutral-800">
+            <div className="mb-15 flex flex-col items-center gap-10 text-center sm:flex-row sm:items-start sm:text-left">
+              <div 
+                className="relative h-30 w-30 shrink-0 overflow-hidden rounded-2xl bg-neutral-200 dark:bg-neutral-800"
+                onContextMenu={(e) => e.preventDefault()}
+              >
                 <Image
                   src={person.avatar}
                   alt={person.name}
                   fill
                   quality={100}
-                  sizes="80px"
                   priority
-                  className="object-cover"
+                  draggable={false}
+                  className="object-cover select-none pointer-events-none"
                 />
               </div>
               <div className="space-y-2">

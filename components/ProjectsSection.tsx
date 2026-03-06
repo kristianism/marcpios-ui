@@ -6,13 +6,13 @@ import { Reveal } from "./Reveal";
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="relative w-full px-6 py-24 lg:py-32">
+    <section id="projects" className="relative w-full px-6 py-12">
       <div className="mx-auto max-w-3xl">
         <Reveal>
           <div className="mb-16 flex items-center gap-6">
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-200 to-transparent dark:via-neutral-700" />
             <h2 className="text-sm font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
-              Selected Work
+              Selected Works
             </h2>
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-200 to-transparent dark:via-neutral-700" />
           </div>

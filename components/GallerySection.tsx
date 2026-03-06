@@ -38,7 +38,7 @@ export function GallerySection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="gallery" className="relative w-full px-6 py-24 lg:py-32">
+    <section ref={sectionRef} id="gallery" className="relative w-full px-6 py-12">
       <div className="mx-auto max-w-4xl">
         <Reveal>
           <div className="mb-16 flex items-center gap-6">
