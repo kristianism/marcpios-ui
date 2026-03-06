@@ -37,7 +37,7 @@ export function AboutSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="about" className="relative w-full px-6 py-24 lg:py-32">
+    <section ref={sectionRef} id="about" className="relative w-full px-6 py-6 lg:py-6">
       <div className="mx-auto max-w-3xl">
         {/* Section Header */}
         <Reveal>

@@ -15,11 +15,8 @@ export default function Home() {
       <Header />
       <main className="relative z-10">
         <HeroSection />
-        <SectionDivider />
-        <ProjectsSection />
-        <SectionDivider />
         <AboutSection />
-        <SectionDivider />
+        <ProjectsSection />
         <GallerySection />
       </main>
       <Footer />

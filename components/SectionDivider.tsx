@@ -31,7 +31,7 @@ export function SectionDivider() {
     <div className="mx-auto w-full max-w-3xl px-6">
       <div
         ref={lineRef}
-        className="h-px w-full origin-left bg-gradient-to-r from-transparent via-neutral-200 to-transparent dark:via-neutral-800"
+        className="h-px w-full origin-left bg-gradient-to-r from-transparent to-transparent via-gray-300"
       />
     </div>
   );
