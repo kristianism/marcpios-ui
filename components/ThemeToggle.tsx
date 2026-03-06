@@ -13,6 +13,18 @@ export function ThemeToggle() {
     const isDark = document.documentElement.classList.contains("dark");
     setTheme(isDark ? "dark" : "light");
     setMounted(true);
+
+    // Listen for OS theme changes when no explicit preference is saved
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const handler = (e: MediaQueryListEvent) => {
+      if (!localStorage.getItem("theme")) {
+        const next = e.matches ? "dark" : "light";
+        setTheme(next);
+        document.documentElement.classList.toggle("dark", e.matches);
+      }
+    };
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
   }, []);
 
   useEffect(() => {
