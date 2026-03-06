@@ -52,28 +52,43 @@ export const about = {
   intro: {
     display: true,
     title: "Introduction",
-    description: `${person.firstName} is a design engineer with a passion for transforming complex challenges into simple, elegant design solutions. Their work spans digital interfaces, interactive experiences, and the convergence of design and technology.`,
+    description: `${person.firstName} is a financial systems developer with a background in management accounting and a drive to build the tools that make financial operations more reliable, automated, and transparent. His work spans cloud accounting systems, workflow automation, and on-chain financial infrastructure.`,
   },
   work: {
     display: true,
     title: "Work Experience",
     experiences: [
       {
-        company: "Studio Alpha",
-        timeframe: "2022 — Present",
-        role: "Senior Design Engineer",
+        company: "Independent",
+        timeframe: "2025 — Present",
+        role: "Financial Systems Automation Developer",
         achievements: [
-          "Redesigned the entire platform UI/UX, resulting in a 20% increase in user engagement and 30% faster load times.",
-          "Spearheaded the integration of AI tools into design workflows, enabling designers to iterate 50% faster.",
+          "Designed and deployed self-hosted n8n automation workflows connecting accounting platforms (Xero, QuickBooks) with external APIs to eliminate manual financial data entry.",
+          "Built automated reporting pipelines that aggregate transaction data, reconcile records, and deliver scheduled financial summaries to stakeholders.",
+          "Integrated webhook-driven workflows to trigger real-time alerts and actions based on financial events, reducing response time on critical accounting tasks.",
+          "Developed JavaScript-powered n8n nodes for custom data transformation and business logic, extending native workflow capabilities for complex financial use cases.",
         ],
       },
       {
-        company: "Creativ3",
-        timeframe: "2018 — 2022",
-        role: "Lead Designer",
+        company: "Freelance Web Developer",
+        timeframe: "2024 — Present",
+        role: "Web Developer",
         achievements: [
-          "Developed a design system that unified the brand across platforms, improving design consistency by 40%.",
-          "Led a cross-functional team to launch a new product line, contributing to a 15% increase in overall revenue.",
+          "Built full-stack web applications with Next.js and TypeScript, focusing on server-rendered financial interfaces and data-dense dashboards.",
+          "Developed Web3-connected frontends using Wagmi and RainbowKit, enabling wallet authentication and on-chain interactions for DeFi applications.",
+          "Implemented scroll-driven animations and page transitions using GSAP and Motion with Lenis, delivering polished UI experiences.",
+          "Designed and shipped responsive, accessible UIs with Tailwind CSS across multiple independent and client projects.",
+        ],
+      },
+      {
+        company: "Freelance Blockchain Developer",
+        timeframe: "2021 — Present",
+        role: "Blockchain Developer",
+        achievements: [
+          "Developed and deployed ERC-20 token contracts and NFT collections, covering minting logic, metadata standards, and on-chain royalty enforcement.",
+          "Built yield farming and yield aggregator protocols, implementing reward distribution mechanics, vault strategies, and gas-optimized compounding logic.",
+          "Contributed to lending protocol development, working on collateralization logic, liquidation mechanisms, and interest rate models.",
+          "Participated in smart contract security audits, identifying vulnerabilities across reentrancy, access control, and arithmetic edge cases.",
         ],
       },
     ],
@@ -87,7 +102,7 @@ export const about = {
         description: "Combining accounting principles with systems thinking, laying the groundwork for a career at the intersection of finance and technology.",
       },
       {
-        name: "Forensic Accountant",
+        name: "Placeholder",
         description: "Studied online marketing and personal branding.",
       },
     ],
@@ -110,7 +125,7 @@ export const about = {
       {
         title: "Web Motion",
         description: "Implementing performant, scroll-driven animations and UI transitions using GSAP and Motion, with Lenis for buttery-smooth scroll experiences.",
-        tags: ["GSAP", "Motion", "Lenis"],
+        tags: ["CSS", "GSAP", "Motion", "Lenis"],
       },
       {
         title: "Solidity",
@@ -121,6 +136,11 @@ export const about = {
         title: "Cloud Accounting",
         description: "Proficient across multiple accounting platforms from setup and chart of accounts configuration to reconciliation workflows and financial reporting",
         tags: ["Xero", "Xero API", "Quickbooks", "Manager.io"],
+      },
+      {
+        title: "Productivity Tools",
+        description: "Proficient with modern productivity and collaboration suites for documentation, project tracking, and cross-team communication in professional environments.",
+        tags: ["Microsoft 365", "Google Workspace", "Slack", "Trello", "Notion", "Obsidian"],
       },
     ],
   },
@@ -146,16 +166,6 @@ export const projects = [
     tags: ["n8n", "Javascript", "Automation", "Webhooks", "APIs"],
     link: "#",
     year: "2026",
-  },
-  {
-    slug: "figma-pipeline",
-    title: "Figma-to-Code Pipeline",
-    summary:
-      "Automated design handover tool that bridges the gap between design and development workflows.",
-    image: "/images/projects/project-03.jpg",
-    tags: ["Automation", "Figma API", "Node.js"],
-    link: "#",
-    year: "2023",
   },
 ];
 
