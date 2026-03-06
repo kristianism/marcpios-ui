@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import { navItems } from "@/lib/portfolio-data";
 import { ThemeToggle } from "./ThemeToggle";
 import { FiHome, FiUser, FiGrid, FiImage } from "react-icons/fi";
+import { useLenis } from "@/app/providers";
 
 const iconMap = {
   home: FiHome,
@@ -17,6 +18,7 @@ export function Header() {
   const [activeSection, setActiveSection] = useState(navItems[0].href);
   const headerRef = useRef<HTMLElement>(null);
   const activeRef = useRef(navItems[0].href);
+  const lenis = useLenis();
 
   const updateActive = useCallback(() => {
     let current = navItems[0].href;
@@ -61,9 +63,8 @@ export function Header() {
   }, []);
 
   const handleNavClick = (href: string) => {
-    const el = document.getElementById(href.slice(1));
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+    if (lenis) {
+      lenis.scrollTo(href);
     }
   };
 

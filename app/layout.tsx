@@ -29,12 +29,12 @@ export default function RootLayout({
           }}
         />
       </head>
-      <SmoothScroll>
-        <body className={`${inter.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} font-sans antialiased`}>
+        <SmoothScroll>
           {children}
           <Analytics />
-        </body>
-      </SmoothScroll>
+        </SmoothScroll>
+      </body>
     </html>
   );
 }
