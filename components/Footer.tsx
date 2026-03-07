@@ -18,13 +18,13 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative w-full px-6 py-16">
+    <footer className="relative w-full px-6 py-16 select-none">
       <div className="mx-auto max-w-3xl">
         <Reveal>
           <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:justify-between sm:text-left">
             <div className="space-y-1">
               <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                <span className="text-neutral-400 dark:text-neutral-500">
+                <span className="text-neutral-900 dark:text-neutral-500">
                   © {currentYear} /
                 </span>{" "}
                 {person.name}
@@ -41,7 +41,7 @@ export function Footer() {
                     href={item.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-9 w-9 items-center justify-center rounded-lg text-neutral-400 transition-colors hover:bg-neutral-100 hover:text-neutral-600 dark:text-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-neutral-300"
+                    className="flex h-9 w-9 items-center justify-center rounded-lg text-neutral-900 transition-colors hover:bg-neutral-100 hover:text-neutral-600 dark:text-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-neutral-300"
                     aria-label={item.name}
                   >
                     <Icon size={18} />

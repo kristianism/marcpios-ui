@@ -43,7 +43,7 @@ export const home = {
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
   headline: "Bridging the gap between financial integrity and scalable code.",
-  subline: `I'm ${person.firstName}, a ${person.role.toLowerCase()} specializing in building robust infrastructure where financial logic meets high-performance code. After hours, I build my own projects.`,
+  subline: `I'm ${person.firstName}, a developer with a finance background, building the tools that automate, audit, and scale financial operations.`,
 };
 
 export const about = {
@@ -68,7 +68,7 @@ export const about = {
         ],
       },
       {
-        company: "Freelance Web Developer",
+        company: "Freelance Web Development",
         timeframe: "2024 — Present",
         role: "Web Developer",
         achievements: [
@@ -77,7 +77,7 @@ export const about = {
         ],
       },
       {
-        company: "Freelance Blockchain Developer",
+        company: "Freelance Blockchain Development",
         timeframe: "2021 — Present",
         role: "Blockchain Developer",
         achievements: [

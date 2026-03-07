@@ -14,11 +14,11 @@ export function GallerySection() {
       <div className="mx-auto max-w-4xl">
         <Reveal>
           <div className="mb-16 flex items-center gap-6">
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-200 to-transparent dark:via-neutral-700" />
-            <h2 className="text-sm font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-500 to-transparent dark:via-neutral-700" />
+            <h2 className="text-sm font-semibold uppercase tracking-widest text-neutral-600 dark:text-neutral-500">
               Gallery
             </h2>
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-200 to-transparent dark:via-neutral-700" />
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-500 to-transparent dark:via-neutral-700" />
           </div>
         </Reveal>
 

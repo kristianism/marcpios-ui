@@ -15,11 +15,11 @@ export function AboutSection() {
         {/* Section Header */}
         <Reveal>
           <div className="mb-16 flex items-center gap-6">
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-200 to-transparent dark:via-neutral-700" />
-            <h2 className="text-sm font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-500 to-transparent dark:via-neutral-700" />
+            <h2 className="text-sm font-semibold uppercase tracking-widest text-neutral-600 dark:text-neutral-500">
               About
             </h2>
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-200 to-transparent dark:via-neutral-700" />
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-500 to-transparent dark:via-neutral-700" />
           </div>
         </Reveal>
 
@@ -38,7 +38,7 @@ export function AboutSection() {
                   quality={100}
                   priority
                   draggable={false}
-                  className="object-cover select-none pointer-events-none"
+                  className="object-cover pointer-evewnts-none"
                 />
               </div>
               <div className="space-y-2">
@@ -48,7 +48,7 @@ export function AboutSection() {
                 <p className="text-sm font-medium text-cyan-600 dark:text-cyan-400">
                   {person.role}
                 </p>
-                <p className="max-w-lg text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+                <p className="max-w-lg text-sm leading-relaxed text-neutral-900 dark:text-neutral-400">
                   {about.intro.description}
                 </p>
               </div>
@@ -65,10 +65,10 @@ export function AboutSection() {
               </h3>
             </Reveal>
 
-            <div className="space-y-0">
+            <div className="space-y-4">
               {about.work.experiences.map((exp, i) => (
                 <Reveal key={exp.company} delay={i * 0.1}>
-                  <div className="relative flex gap-6 pb-10 last:pb-0">
+                  <div className="relative flex gap-6">
                     {/* Timeline */}
                     <div className="flex flex-col items-center">
                       <div className="z-10 flex h-3 w-3 shrink-0 items-center justify-center rounded-full border-2 border-cyan-500 bg-white dark:border-cyan-400 dark:bg-neutral-900" />
@@ -78,8 +78,18 @@ export function AboutSection() {
                     </div>
 
                     {/* Content */}
-                    <div className="-mt-1 flex-1 space-y-2 pb-2">
-                      <div className="flex flex-wrap items-baseline gap-2">
+                    <div
+                      className="group -mt-1 flex-1 space-y-2 relative overflow-hidden rounded-xl border border-neutral-100 bg-white p-5 transition-shadow hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900/50"
+                      onMouseMove={(e) => {
+                        const rect = e.currentTarget.getBoundingClientRect();
+                        e.currentTarget.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+                        e.currentTarget.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+                      }}
+                    >
+                      <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" style={{
+                        background: "radial-gradient(250px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(6,182,212,0.06), transparent 60%)",
+                      }} />
+                      <div className="relative flex flex-wrap items-baseline gap-2">
                         <h4 className="font-semibold text-neutral-900 dark:text-white">
                           {exp.company}
                         </h4>
@@ -87,10 +97,10 @@ export function AboutSection() {
                           {exp.timeframe}
                         </span>
                       </div>
-                      <p className="text-sm font-medium text-neutral-600 dark:text-neutral-300">
+                      <p className="relative text-sm font-medium text-neutral-600 dark:text-neutral-300">
                         {exp.role}
                       </p>
-                      <ul className="space-y-1.5 pt-1">
+                      <ul className="relative space-y-1.5 pt-1">
                         {exp.achievements.map((achievement, j) => (
                           <li
                             key={j}
@@ -120,11 +130,21 @@ export function AboutSection() {
             <RevealGroup className="space-y-4" staggerDelay={0.1}>
               {about.studies.institutions.map((inst) => (
                 <RevealChild key={inst.name}>
-                  <div className="rounded-xl border border-neutral-100 bg-neutral-50/50 p-5 transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:bg-neutral-800/30 dark:hover:bg-neutral-800/50">
-                    <h4 className="font-semibold text-neutral-900 dark:text-white">
+                  <div
+                    className="group relative overflow-hidden rounded-xl border border-neutral-100 bg-white p-5 transition-shadow hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900/50"
+                    onMouseMove={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      e.currentTarget.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+                      e.currentTarget.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+                    }}
+                  >
+                    <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" style={{
+                      background: "radial-gradient(250px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(6,182,212,0.06), transparent 60%)",
+                    }} />
+                    <h4 className="relative font-semibold text-neutral-900 dark:text-white">
                       {inst.name}
                     </h4>
-                    <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+                    <p className="relative mt-1 text-sm text-neutral-500 dark:text-neutral-400">
                       {inst.description}
                     </p>
                   </div>
@@ -165,7 +185,7 @@ function TimelineLine() {
       ref={ref}
       className="h-full w-px origin-top bg-neutral-200 dark:bg-neutral-700"
       initial={{ scaleY: 0 }}
-      animate={isInView ? { scaleY: 1 } : {}}
+      animate={isInView ? { scaleY: 1.10 } : {}}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     />
   );
