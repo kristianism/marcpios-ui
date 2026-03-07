@@ -23,7 +23,6 @@ export function ProjectCard({
   index,
 }: ProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: true, margin: "-80px" });
 
   const { scrollYProgress } = useScroll({
@@ -48,7 +47,6 @@ export function ProjectCard({
         {/* Image */}
         <div className="relative aspect-[16/9] overflow-hidden bg-neutral-100 dark:bg-neutral-800">
           <motion.div
-            ref={imageRef}
             style={{ y: imageY }}
             className="absolute inset-0 flex items-center justify-center will-change-transform"
           >

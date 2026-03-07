@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { motion, useInView, type Variant } from "motion/react";
 
 interface RevealProps {
@@ -31,7 +31,7 @@ export function Reveal({
     opacity: 0,
     y,
     x,
-    filter: blur ? "blur(8px)" : "blur(0px)",
+    filter: blur ? "blur(4px)" : "blur(0px)",
   };
 
   const visible: Variant = {
@@ -96,7 +96,7 @@ export function RevealChild({
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0, y: 20, filter: "blur(6px)" },
+        hidden: { opacity: 0, y: 20, filter: "blur(3px)" },
         visible: {
           opacity: 1,
           y: 0,

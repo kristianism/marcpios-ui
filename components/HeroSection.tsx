@@ -22,7 +22,7 @@ export function HeroSection() {
       ref={sectionRef}
       id="home"
       style={{ opacity, y }}
-      className="relative flex min-h-[100dvh] w-full flex-col items-center justify-center px-6 py-32"
+      className="relative flex min-h-[100dvh] w-full flex-col items-center justify-center px-6 py-32 will-change-transform"
     >
       <div className="flex max-w-2xl flex-col items-center text-center">
         <Reveal delay={0.1} y={8}>

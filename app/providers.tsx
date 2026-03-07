@@ -13,7 +13,10 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
 
   useEffect(() => {
-    const instance = new Lenis();
+    const instance = new Lenis({
+      syncTouch: true,
+      touchMultiplier: 1.5,
+    });
     setLenis(instance);
 
     function raf(time: number) {
