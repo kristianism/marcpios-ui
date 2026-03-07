@@ -5,12 +5,14 @@ import { AboutSection } from "@/components/AboutSection";
 import { GallerySection } from "@/components/GallerySection";
 import { Footer } from "@/components/Footer";
 import { BackgroundDots, BackgroundGradient } from "@/components/BackgroundEffects";
+import { ScrollingCodeBackground } from "@/components/ScrollingCodeBackground";
 
 export default function Home() {
   return (
     <>
       <BackgroundDots />
       <BackgroundGradient />
+      <ScrollingCodeBackground />
       <Header />
       <main className="relative z-10 select-none">
         <HeroSection />
