@@ -12,7 +12,7 @@ export default function Home() {
       <BackgroundDots />
       <BackgroundGradient />
       <Header />
-      <main className="relative z-10">
+      <main className="relative z-10 select-none">
         <HeroSection />
         <AboutSection />
         <ProjectsSection />
