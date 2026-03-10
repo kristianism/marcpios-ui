@@ -21,7 +21,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Marc Pios — Portfolio",
+  title: "Marc Pios - Automating Finance with Code",
   description: "Bridging the gap between financial integrity and scalable code.",
 };
 
