@@ -110,9 +110,9 @@ export const about = {
     title: "Technical Skills",
     skills: [
       {
-        title: "n8n Automation",
+        title: "Workflow Automation",
         description: "Designing and implementing custom n8n workflows to automate data pipelines, API integrations, and repetitive tasks across financial systems.",
-        tags: ["n8n", "Automation", "Webhooks", "APIs", "JavaScript"],
+        tags: ["n8n", "Automation", "Webhooks", "APIs", "JavaScript", "Python"],
       },
       {
         title: "Next.js",
@@ -120,7 +120,7 @@ export const about = {
         tags: ["TypeScript", "React", "Next.js", "Tailwind CSS", "Wagmi", "RainbowKit"],
       },
       {
-        title: "Web Motion",
+        title: "UI Motion",
         description: "Implementing performant, scroll-driven animations and UI transitions using GSAP and Motion, with Lenis for buttery-smooth scroll experiences.",
         tags: ["CSS", "GSAP", "Motion", "Lenis"],
       },
@@ -158,7 +158,7 @@ export const projects = [
     slug: "resin-manila",
     title: "RSN + MNL Website",
     summary:
-      "A fast, animated portfolio site built with Next.js showcasing projects, skills, and a photo gallery with fluid scroll experiences powered by Motion and Lenis. Inspired by OnceUI's Magic Portfolio template.",
+      "A smooth, animated landing page built with Next.js showcasing the step-by-step process of premium epoxy resin flooring application with fluid scroll experiences powered by Motion and Lenis.",
     image: "/resin-manila.png",
     tags: ["Next.js", "React", "TypeScript", "Motion", "Lenis"],
     link: "https://www.resinmanila.com/",
@@ -170,7 +170,7 @@ export const projects = [
     summary:
       "A growing library of self-hosted n8n automation workflows designed to eliminate repetitive tasks across financial systems, APIs, and data pipelines.",
     image: "/n8n-workflow.png",
-    tags: ["n8n", "Javascript", "Automation", "Webhooks", "APIs"],
+    tags: ["n8n", "Javascript", "Automation", "Webhooks", "APIs", "Raspberry Pi"],
     link: "https://www.n8n.io/",
     year: "2025",
   },
