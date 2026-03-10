@@ -97,7 +97,7 @@ export const about = {
       },
       {
         name: "Institute of Financial Consultants",
-        description: "Certified Financial Consultant (CFC) designation, covering financial planning, investment strategies, and ethical practices in the financial industry.",
+        description: "Certified Financial Consultant (CFC) credential, covering financial planning, investment strategies, and ethical practices in the financial industry.",
       },
       {
         name: "University of Santo Tomas (UST) - BS Management Accounting",
@@ -146,12 +146,22 @@ export const about = {
 export const projects = [
   {
     slug: "my-portfolio",
-    title: "Portfolio Website",
+    title: "Personal Portfolio Website",
     summary:
       "A fast, animated portfolio site built with Next.js showcasing projects, skills, and a photo gallery with fluid scroll experiences powered by Motion and Lenis. Inspired by OnceUI's Magic Portfolio template.",
     image: "/portfolio-website.png",
     tags: ["Next.js", "React", "TypeScript", "Motion", "Lenis"],
     link: "#",
+    year: "2026",
+  },
+  {
+    slug: "resin-manila",
+    title: "RSN + MNL Website",
+    summary:
+      "A fast, animated portfolio site built with Next.js showcasing projects, skills, and a photo gallery with fluid scroll experiences powered by Motion and Lenis. Inspired by OnceUI's Magic Portfolio template.",
+    image: "/resin-manila.png",
+    tags: ["Next.js", "React", "TypeScript", "Motion", "Lenis"],
+    link: "https://www.resinmanila.com/",
     year: "2026",
   },
   {
@@ -170,11 +180,11 @@ export const gallery = {
   title: `Photo Gallery — ${person.name}`,
   description: `A curated collection of moments`,
   images: [
-    { src: "/images/gallery/gallery-01.jpg", alt: "Gallery image 1", orientation: "horizontal" as const },
-    { src: "/images/gallery/gallery-02.jpg", alt: "Gallery image 2", orientation: "vertical" as const },
-    { src: "/images/gallery/gallery-03.jpg", alt: "Gallery image 3", orientation: "horizontal" as const },
-    { src: "/images/gallery/gallery-04.jpg", alt: "Gallery image 4", orientation: "vertical" as const },
-    { src: "/images/gallery/gallery-05.jpg", alt: "Gallery image 5", orientation: "horizontal" as const },
+    { src: "/resin-manila.png", alt: "Resin Manila Website", orientation: "horizontal" as const },
+    { src: "/n8n-telegram-to-trello.png", alt: "N8N Workflow 1", orientation: "vertical" as const },
+    { src: "/lxp-growers.png", alt: "LXP Growers Website", orientation: "horizontal" as const },
+    { src: "/n8n-telegram-to-xero-quote.png", alt: "N8N Workflow 2", orientation: "vertical" as const },
+    { src: "/fratelli-solutions.png", alt: "Fratelli Solutions Website", orientation: "horizontal" as const },
     { src: "/images/gallery/gallery-06.jpg", alt: "Gallery image 6", orientation: "vertical" as const },
   ],
 };
