@@ -82,24 +82,11 @@ export function GallerySection() {
               className="relative w-full max-w-4xl overflow-hidden rounded-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex aspect-[4/3] w-full items-center justify-center bg-neutral-900 text-neutral-500">
-                <div className="text-center">
-                  <svg
-                    className="mx-auto mb-4 h-16 w-16 opacity-40"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={1}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0 0 22.5 18.75V5.25A2.25 2.25 0 0 0 20.25 3H3.75A2.25 2.25 0 0 0 1.5 5.25v13.5A2.25 2.25 0 0 0 3.75 21Z"
-                    />
-                  </svg>
-                  <p className="text-sm">{gallery.images[lightboxIndex].alt}</p>
-                </div>
-              </div>
+              <img
+                src={gallery.images[lightboxIndex].src}
+                alt={gallery.images[lightboxIndex].alt}
+                className="w-full object-contain"
+              />
               <button
                 onClick={close}
                 className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70"
@@ -141,7 +128,7 @@ export function GallerySection() {
 }
 
 interface GalleryItemProps {
-  image: { orientation: string; alt: string };
+  image: { src: string; orientation: string; alt: string };
   index: number;
   onClick: () => void;
 }
@@ -168,25 +155,15 @@ function GalleryItem({ image, index, onClick }: GalleryItemProps) {
         className="group relative w-full overflow-hidden rounded-xl"
       >
         <div
-          className={`w-full bg-gradient-to-br from-neutral-200 via-neutral-100 to-neutral-200 transition-transform duration-700 group-hover:scale-105 dark:from-neutral-800 dark:via-neutral-700 dark:to-neutral-800 ${
+          className={`w-full overflow-hidden transition-transform duration-700 group-hover:scale-105 ${
             image.orientation === "vertical" ? "aspect-[3/4]" : "aspect-[4/3]"
           }`}
         >
-          <div className="flex h-full items-center justify-center text-neutral-400 dark:text-neutral-500">
-            <svg
-              className="h-10 w-10 opacity-30"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={1}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0 0 22.5 18.75V5.25A2.25 2.25 0 0 0 20.25 3H3.75A2.25 2.25 0 0 0 1.5 5.25v13.5A2.25 2.25 0 0 0 3.75 21Z"
-              />
-            </svg>
-          </div>
+          <img
+            src={image.src}
+            alt={image.alt}
+            className="h-full w-full object-cover"
+          />
         </div>
         <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10" />
       </button>
