@@ -159,7 +159,7 @@ export const projects = [
     title: "n8n Workflow Library",
     summary:
       "A growing library of self-hosted n8n automation workflows designed to eliminate repetitive tasks across financial systems, APIs, and data pipelines.",
-    image: "/images/projects/project-02.jpg",
+    image: "/n8n-workflow.png",
     tags: ["n8n", "Javascript", "Automation", "Webhooks", "APIs"],
     link: "#",
     year: "2026",
