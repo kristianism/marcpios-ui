@@ -151,7 +151,7 @@ export const projects = [
       "A fast, animated portfolio site built with Next.js showcasing projects, skills, and a photo gallery with fluid scroll experiences powered by Motion and Lenis. Inspired by OnceUI's Magic Portfolio template.",
     image: "/portfolio-website.png",
     tags: ["Next.js", "React", "TypeScript", "Motion", "Lenis"],
-    link: "#",
+    link: "https://github.com/kristianism/marcpios-ui",
     year: "2026",
   },
   {
@@ -171,7 +171,7 @@ export const projects = [
       "A growing library of self-hosted n8n automation workflows designed to eliminate repetitive tasks across financial systems, APIs, and data pipelines.",
     image: "/n8n-workflow.png",
     tags: ["n8n", "Javascript", "Automation", "Webhooks", "APIs"],
-    link: "#",
+    link: "https://www.n8n.io/",
     year: "2025",
   },
 ];
@@ -185,7 +185,6 @@ export const gallery = {
     { src: "/lxp-growers.png", alt: "LXP Growers Website", orientation: "horizontal" as const },
     { src: "/n8n-telegram-to-xero-quote.png", alt: "N8N Workflow 2", orientation: "vertical" as const },
     { src: "/fratelli-solutions.png", alt: "Fratelli Solutions Website", orientation: "horizontal" as const },
-    { src: "/images/gallery/gallery-06.jpg", alt: "Gallery image 6", orientation: "vertical" as const },
   ],
 };
 
