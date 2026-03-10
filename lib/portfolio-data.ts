@@ -162,7 +162,7 @@ export const projects = [
     image: "/n8n-workflow.png",
     tags: ["n8n", "Javascript", "Automation", "Webhooks", "APIs"],
     link: "#",
-    year: "2026",
+    year: "2025",
   },
 ];
 
