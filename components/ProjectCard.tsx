@@ -106,6 +106,8 @@ export function ProjectCard({
             </div>
             <a
               href={link}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group/link flex items-center gap-1.5 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
             >
               View project
