@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useCallback } from "react";
-import { motion } from "motion/react";
 
 // ── Content pools ────────────────────────────────────────────────────────────
 
@@ -90,14 +89,18 @@ export function ScrollingCodeBackground({
   const itemsRef = useRef<FloatingItem[]>([]);
   const rafRef = useRef<number>(0);
   const scrollRef = useRef<number>(0);
+  const resizeTimerRef = useRef<ReturnType<typeof setTimeout>>(null);
+  const isRunningRef = useRef(false);
 
-  // Build items once, deterministically
+  // Build items once, deterministically — reduce count on mobile
   const buildItems = useCallback(() => {
     const rng = mulberry32(42);
     const totalHeight = window.innerHeight * spread;
     const items: FloatingItem[] = [];
+    const isMobile = window.innerWidth < 768;
+    const count = isMobile ? Math.min(itemCount, 40) : itemCount;
 
-    for (let i = 0; i < itemCount; i++) {
+    for (let i = 0; i < count; i++) {
       const isCode = rng() > 0.4; // 60% code, 40% computation
       const depth = 0.15 + rng() * 0.85;           // parallax depth
       const baseY = rng() * totalHeight - window.innerHeight * 0.3;
@@ -144,7 +147,7 @@ export function ScrollingCodeBackground({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const dpr = window.devicePixelRatio || 1;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const w = window.innerWidth;
     const h = window.innerHeight;
 
@@ -230,43 +233,58 @@ export function ScrollingCodeBackground({
     rafRef.current = requestAnimationFrame(render);
   }, []);
 
+  const startLoop = useCallback(() => {
+    if (isRunningRef.current) return;
+    isRunningRef.current = true;
+    rafRef.current = requestAnimationFrame(render);
+  }, [render]);
+
+  const stopLoop = useCallback(() => {
+    isRunningRef.current = false;
+    cancelAnimationFrame(rafRef.current);
+  }, []);
+
   useEffect(() => {
     buildItems();
 
     const onScroll = () => {
       scrollRef.current = window.scrollY;
     };
-    // Initialise scroll position
     scrollRef.current = window.scrollY;
 
+    const debouncedBuild = () => {
+      if (resizeTimerRef.current) clearTimeout(resizeTimerRef.current);
+      resizeTimerRef.current = setTimeout(buildItems, 200);
+    };
+
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        stopLoop();
+      } else {
+        startLoop();
+      }
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", buildItems);
+    window.addEventListener("resize", debouncedBuild);
+    document.addEventListener("visibilitychange", onVisibilityChange);
 
-    rafRef.current = requestAnimationFrame(render);
-
-    // Redraw on theme changes
-    const observer = new MutationObserver(() => {});
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
+    startLoop();
 
     return () => {
-      cancelAnimationFrame(rafRef.current);
+      stopLoop();
+      if (resizeTimerRef.current) clearTimeout(resizeTimerRef.current);
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", buildItems);
-      observer.disconnect();
+      window.removeEventListener("resize", debouncedBuild);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
     };
-  }, [buildItems, render]);
+  }, [buildItems, startLoop, stopLoop]);
 
   return (
-    <motion.canvas
+    <canvas
       ref={canvasRef}
       className="pointer-events-none fixed inset-0 z-0"
       aria-hidden="true"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 2, ease: "easeOut" }}
     />
   );
 }

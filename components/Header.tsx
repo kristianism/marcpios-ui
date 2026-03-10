@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { navItems } from "@/lib/portfolio-data";
 import { ThemeToggle } from "./ThemeToggle";
@@ -17,38 +17,37 @@ const iconMap = {
 export function Header() {
   const [activeSection, setActiveSection] = useState(navItems[0].href);
   const headerRef = useRef<HTMLElement>(null);
-  const activeRef = useRef(navItems[0].href);
   const lenis = useLenis();
 
-  const updateActive = useCallback(() => {
-    let current = navItems[0].href;
-    const triggerLine = window.innerHeight * 0.35;
-
-    for (const item of navItems) {
-      const el = document.getElementById(item.href.slice(1));
-      if (el) {
-        const top = el.getBoundingClientRect().top;
-        if (top <= triggerLine) {
-          current = item.href;
-        }
-      }
-    }
-
-    if (activeRef.current !== current) {
-      activeRef.current = current;
-      setActiveSection(current);
-    }
-  }, []);
-
   useEffect(() => {
-    let rafId: number;
-    const loop = () => {
-      updateActive();
-      rafId = requestAnimationFrame(loop);
-    };
-    rafId = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(rafId);
-  }, [updateActive]);
+    const sectionEls = navItems
+      .map((item) => document.getElementById(item.href.slice(1)))
+      .filter(Boolean) as HTMLElement[];
+
+    if (sectionEls.length === 0) return;
+
+    const visibleSections = new Map<string, boolean>();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          visibleSections.set(entry.target.id, entry.isIntersecting);
+        }
+        // Pick the last visible section in DOM order
+        for (let i = navItems.length - 1; i >= 0; i--) {
+          const id = navItems[i].href.slice(1);
+          if (visibleSections.get(id)) {
+            setActiveSection(navItems[i].href);
+            return;
+          }
+        }
+      },
+      { rootMargin: "-35% 0px -55% 0px" },
+    );
+
+    for (const el of sectionEls) observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!headerRef.current) return;

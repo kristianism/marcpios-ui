@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, useInView } from "motion/react";
 import { gallery } from "@/lib/portfolio-data";
 import { Reveal } from "./Reveal";
@@ -8,6 +8,35 @@ import { Reveal } from "./Reveal";
 export function GallerySection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const goPrev = useCallback(() => {
+    setLightboxIndex((i) => (i !== null && i > 0 ? i - 1 : i));
+  }, []);
+
+  const goNext = useCallback(() => {
+    setLightboxIndex((i) =>
+      i !== null && i < gallery.images.length - 1 ? i + 1 : i,
+    );
+  }, []);
+
+  const close = useCallback(() => setLightboxIndex(null), []);
+
+  // Keyboard navigation and body scroll lock
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+
+    document.body.style.overflow = "hidden";
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+      else if (e.key === "ArrowLeft") goPrev();
+      else if (e.key === "ArrowRight") goNext();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [lightboxIndex, close, goPrev, goNext]);
 
   return (
     <section ref={sectionRef} id="gallery" className="relative w-full px-6 py-12">
@@ -42,18 +71,18 @@ export function GallerySection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm"
-            onClick={() => setLightboxIndex(null)}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 sm:p-8"
+            onClick={close}
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="relative max-h-[80vh] max-w-[80vw] overflow-hidden rounded-2xl"
+              className="relative w-full max-w-4xl overflow-hidden rounded-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex h-[60vh] w-[60vw] items-center justify-center bg-neutral-900 text-neutral-500">
+              <div className="flex aspect-[4/3] w-full items-center justify-center bg-neutral-900 text-neutral-500">
                 <div className="text-center">
                   <svg
                     className="mx-auto mb-4 h-16 w-16 opacity-40"
@@ -72,8 +101,9 @@ export function GallerySection() {
                 </div>
               </div>
               <button
-                onClick={() => setLightboxIndex(null)}
+                onClick={close}
                 className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70"
+                aria-label="Close lightbox"
               >
                 ×
               </button>
@@ -82,9 +112,10 @@ export function GallerySection() {
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    setLightboxIndex(lightboxIndex - 1);
+                    goPrev();
                   }}
                   className="absolute left-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70"
+                  aria-label="Previous image"
                 >
                   ‹
                 </button>
@@ -93,9 +124,10 @@ export function GallerySection() {
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    setLightboxIndex(lightboxIndex + 1);
+                    goNext();
                   }}
                   className="absolute right-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70"
+                  aria-label="Next image"
                 >
                   ›
                 </button>

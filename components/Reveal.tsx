@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView, type Variant } from "motion/react";
+import { motion, useInView, useReducedMotion, type Variant } from "motion/react";
 
 interface RevealProps {
   children: React.ReactNode;
@@ -26,19 +26,24 @@ export function Reveal({
 }: RevealProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once, margin: "-60px" });
+  const prefersReducedMotion = useReducedMotion();
+
+  if (prefersReducedMotion) {
+    return <div ref={ref} className={className}>{children}</div>;
+  }
 
   const hidden: Variant = {
     opacity: 0,
     y,
     x,
-    filter: blur ? "blur(4px)" : "blur(0px)",
+    ...(blur && { filter: "blur(4px)" }),
   };
 
   const visible: Variant = {
     opacity: 1,
     y: 0,
     x: 0,
-    filter: "blur(0px)",
+    ...(blur && { filter: "blur(0px)" }),
   };
 
   return (
@@ -69,6 +74,11 @@ export function RevealGroup({
 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-40px" });
+  const prefersReducedMotion = useReducedMotion();
+
+  if (prefersReducedMotion) {
+    return <div ref={ref} className={className}>{children}</div>;
+  }
 
   return (
     <motion.div
@@ -96,11 +106,10 @@ export function RevealChild({
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0, y: 20, filter: "blur(3px)" },
+        hidden: { opacity: 0, y: 20 },
         visible: {
           opacity: 1,
           y: 0,
-          filter: "blur(0px)",
           transition: { duration: 0.6, ease: [0.25, 0.4, 0.25, 1] },
         },
       }}

@@ -50,7 +50,6 @@ export function HeroSection() {
                   src={person.avatar}
                   alt={person.name}
                   fill
-                  quality={100}
                   sizes="28px"
                   className="object-cover select-none pointer-events-none"
                 />

@@ -7,10 +7,8 @@ import { about, person } from "@/lib/portfolio-data";
 import { Reveal, RevealGroup, RevealChild } from "./Reveal";
 
 export function AboutSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-
   return (
-    <section ref={sectionRef} id="about" className="relative w-full px-6 py-12 select-none">
+    <section id="about" className="relative w-full px-6 py-12 select-none">
       <div className="mx-auto max-w-3xl">
         {/* Section Header */}
         <Reveal>
@@ -35,10 +33,11 @@ export function AboutSection() {
                   src={person.avatar}
                   alt={person.name}
                   fill
-                  quality={100}
+                  quality={75}
+                  sizes="120px"
                   priority
                   draggable={false}
-                  className="object-cover pointer-evewnts-none"
+                  className="object-cover pointer-events-none"
                 />
               </div>
               <div className="space-y-2">

@@ -19,13 +19,27 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     });
     setLenis(instance);
 
+    let rafId: number;
     function raf(time: number) {
       instance.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
-    return () => instance.destroy();
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(rafId);
+      } else {
+        rafId = requestAnimationFrame(raf);
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      instance.destroy();
+    };
   }, []);
 
   return (

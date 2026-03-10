@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useInView, useScroll, useTransform } from "motion/react";
 
 interface ProjectCardProps {
@@ -51,10 +52,12 @@ export function ProjectCard({
             className="absolute inset-0 flex items-center justify-center will-change-transform"
           >
             {image ? (
-              <img
+              <Image
                 src={image}
                 alt={title}
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                fill
+                sizes="(max-width: 768px) 100vw, 768px"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
             ) : (
               <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-neutral-200 via-neutral-100 to-neutral-200 text-neutral-400 transition-transform duration-700 group-hover:scale-105 dark:from-neutral-800 dark:via-neutral-700 dark:to-neutral-800 dark:text-neutral-500">

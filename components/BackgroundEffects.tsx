@@ -13,6 +13,7 @@ export function BackgroundDots({
   opacity = 0.15,
 }: BackgroundDotsProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const resizeTimerRef = useRef<ReturnType<typeof setTimeout>>(null);
 
   const draw = useCallback(() => {
     const canvas = canvasRef.current;
@@ -21,34 +22,40 @@ export function BackgroundDots({
     if (!ctx) return;
 
     const spacing = 28;
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = window.innerWidth * dpr;
-    canvas.height = window.innerHeight * dpr;
-    canvas.style.width = `${window.innerWidth}px`;
-    canvas.style.height = `${window.innerHeight}px`;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = `${w}px`;
+    canvas.style.height = `${h}px`;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, w, h);
     const isDark = document.documentElement.classList.contains("dark");
     const color = isDark
       ? `rgba(255,255,255,${opacity})`
       : `rgba(0,0,0,${opacity * 0.6})`;
 
-    for (let x = 0; x < window.innerWidth; x += spacing) {
-      for (let y = 0; y < window.innerHeight; y += spacing) {
-        ctx.beginPath();
-        ctx.arc(x, y, dotSize, 0, Math.PI * 2);
-        ctx.fillStyle = color;
-        ctx.fill();
+    ctx.fillStyle = color;
+    const size = dotSize * 2;
+    for (let x = 0; x < w; x += spacing) {
+      for (let y = 0; y < h; y += spacing) {
+        ctx.fillRect(x - dotSize, y - dotSize, size, size);
       }
     }
   }, [dotSize, opacity]);
 
   useEffect(() => {
     draw();
-    window.addEventListener("resize", draw);
 
-    // Redraw when theme changes
+    const debouncedDraw = () => {
+      if (resizeTimerRef.current) clearTimeout(resizeTimerRef.current);
+      resizeTimerRef.current = setTimeout(draw, 150);
+    };
+
+    window.addEventListener("resize", debouncedDraw);
+
     const observer = new MutationObserver(draw);
     observer.observe(document.documentElement, {
       attributes: true,
@@ -56,19 +63,17 @@ export function BackgroundDots({
     });
 
     return () => {
-      window.removeEventListener("resize", draw);
+      window.removeEventListener("resize", debouncedDraw);
+      if (resizeTimerRef.current) clearTimeout(resizeTimerRef.current);
       observer.disconnect();
     };
   }, [draw]);
 
   return (
-    <motion.canvas
+    <canvas
       ref={canvasRef}
       className="pointer-events-none fixed inset-0 z-0"
       aria-hidden="true"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1.5, ease: "easeOut" }}
     />
   );
 }
