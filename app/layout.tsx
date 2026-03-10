@@ -23,6 +23,26 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Marc Pios - Automating Finance with Code",
   description: "Bridging the gap between financial integrity and scalable code.",
+  metadataBase: new URL("https://marcpios.com"),
+  openGraph: {
+    title: "Marc Pios - Automating Finance with Code",
+    description: "Bridging the gap between financial integrity and scalable code.",
+    images: [
+      {
+        url: "/portfolio-website.png",
+        width: 1200,
+        height: 630,
+        alt: "Marc Pios Portfolio",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Marc Pios - Automating Finance with Code",
+    description: "Bridging the gap between financial integrity and scalable code.",
+    images: ["/portfolio-website.png"],
+  },
 };
 
 export default function RootLayout({
