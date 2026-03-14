@@ -6,7 +6,7 @@ export const person = {
   name: "Marc Pios",
   role: "Financial Systems Developer",
   avatar: "/profile-picture.jpg",
-  email: "marcpios@proton.me",
+  email: "marcpios@pm.me",
   location: "Asia/Manila",
   languages: ["English", "Filipino"],
 };
