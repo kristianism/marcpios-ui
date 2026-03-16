@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence, useInView } from "motion/react";
 import { gallery } from "@/lib/portfolio-data";
 import { Reveal } from "./Reveal";
@@ -155,14 +156,16 @@ function GalleryItem({ image, index, onClick }: GalleryItemProps) {
         className="group relative w-full overflow-hidden rounded-xl"
       >
         <div
-          className={`w-full overflow-hidden transition-transform duration-700 group-hover:scale-105 ${
+          className={`relative w-full overflow-hidden transition-transform duration-700 group-hover:scale-105 ${
             image.orientation === "vertical" ? "aspect-[3/4]" : "aspect-[4/3]"
           }`}
         >
-          <img
+          <Image
             src={image.src}
             alt={image.alt}
-            className="h-full w-full object-cover"
+            fill
+            sizes="(max-width: 768px) 50vw, 33vw"
+            className="object-cover"
           />
         </div>
         <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10" />

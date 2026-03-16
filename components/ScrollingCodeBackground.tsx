@@ -91,6 +91,8 @@ export function ScrollingCodeBackground({
   const scrollRef = useRef<number>(0);
   const resizeTimerRef = useRef<ReturnType<typeof setTimeout>>(null);
   const isRunningRef = useRef(false);
+  const dirtyRef = useRef(true);
+  const lastDarkRef = useRef<boolean | null>(null);
 
   // Build items once, deterministically — reduce count on mobile
   const buildItems = useCallback(() => {
@@ -147,6 +149,14 @@ export function ScrollingCodeBackground({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    const isDark = document.documentElement.classList.contains("dark");
+    if (!dirtyRef.current && isDark === lastDarkRef.current) {
+      rafRef.current = requestAnimationFrame(render);
+      return;
+    }
+    dirtyRef.current = false;
+    lastDarkRef.current = isDark;
+
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const w = window.innerWidth;
     const h = window.innerHeight;
@@ -160,7 +170,6 @@ export function ScrollingCodeBackground({
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, w, h);
 
-    const isDark = document.documentElement.classList.contains("dark");
     const scroll = scrollRef.current;
 
     for (const item of itemsRef.current) {
@@ -245,16 +254,24 @@ export function ScrollingCodeBackground({
   }, []);
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (isMobile || prefersReducedMotion) return;
+
     buildItems();
 
     const onScroll = () => {
       scrollRef.current = window.scrollY;
+      dirtyRef.current = true;
     };
     scrollRef.current = window.scrollY;
 
     const debouncedBuild = () => {
       if (resizeTimerRef.current) clearTimeout(resizeTimerRef.current);
-      resizeTimerRef.current = setTimeout(buildItems, 200);
+      resizeTimerRef.current = setTimeout(() => {
+        buildItems();
+        dirtyRef.current = true;
+      }, 200);
     };
 
     const onVisibilityChange = () => {

@@ -64,6 +64,8 @@ export function Header() {
   const handleNavClick = (href: string) => {
     if (lenis) {
       lenis.scrollTo(href);
+    } else {
+      document.querySelector(href)?.scrollIntoView();
     }
   };
 

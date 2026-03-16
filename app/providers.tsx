@@ -13,6 +13,8 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const instance = new Lenis({
       syncTouch: true,
       touchMultiplier: 1.5,
